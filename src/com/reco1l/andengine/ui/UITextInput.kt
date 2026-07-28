@@ -164,6 +164,11 @@ open class UITextInput(initialValue: String) : UIControl<String>(initialValue), 
             if (!isFocused) {
                 focus()
             } else {
+                // Ensure the keyboard is shown even when the input is already focused. The keyboard
+                // may have been hidden externally (e.g. via the system's hide button) without the
+                // input losing focus.
+                setKeyboardVisibility(true)
+
                 val x = localX - padding.left
 
                 // Find the closest letter position to the touch
